@@ -169,7 +169,6 @@ else
     # We should never encase this in "" or it won't expand correctly.
     export $(cat .env | xargs)
 
-    echo "Redeploying the stack"
     #if ! docker ps | grep -q "${project_container_name}_postgres"; then
     # A better way to check whether the stack is deployed.
     if ! docker stack ls | grep -q "${project_container_name}"; then
