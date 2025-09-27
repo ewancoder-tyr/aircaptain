@@ -170,8 +170,10 @@ else
     export $(cat .env | xargs)
 
     echo "Redeploying the stack"
-    if ! docker ps | grep -q "${project_container_name}_postgres"; then
-        # If database is not running - most likely it's the first deployment. Deploying the stack.
+    #if ! docker ps | grep -q "${project_container_name}_postgres"; then
+    # A better way to check whether the stack is deployed.
+    if ! docker stack ls | grep -q "${project_container_name}"; then
+        # If the stack is not running - most likely it's the first deployment. Deploying the stack.
         echo "Database is not running, probably first time deployment. Deploying the stack and migrating DB."
         docker stack deploy "${stack_name}" --compose-file swarm-compose.yml --detach=false
 
