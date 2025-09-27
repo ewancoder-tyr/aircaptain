@@ -173,6 +173,7 @@ else
     # A better way to check whether the stack is deployed.
     if ! docker stack ls | grep -q "${project_container_name}"; then
         # If the stack is not running - most likely it's the first deployment. Deploying the stack.
+        docker stack ls # Temporarily
         echo "Database is not running, probably first time deployment. Deploying the stack and migrating DB."
         docker stack deploy "${stack_name}" --compose-file swarm-compose.yml --detach=false
 
